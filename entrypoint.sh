@@ -9,6 +9,7 @@ download () {
     if [ ! -z $AUDIBLE_PROFILE ]
     then 
         download_opts=(${download_opts[@]} --profile $AUDIBLE_PROFILE)
+        last_run_file="$last_run_file-$AUDIBLE_PROFILE"
     fi
 
     download_opts=(${download_opts[@]} download)
