@@ -44,7 +44,15 @@ download () {
     fi
 
     audible "${download_opts[@]}"
-    audible library export -o $AUDIBLE_CONFIG_DIR/library.tsv
+
+    library_file=$AUDIBLE_CONFIG_DIR/library.tsv
+    if [ ! -z $AUDIBLE_PROFILE ]
+    then
+        library_file=$AUDIBLE_CONFIG_DIR/library-$AUDIBLE_PROFILE.tsv
+        audible --profile $AUDIBLE_PROFILE library export -o $library_file
+    else
+        audible library export -o $library_file
+    fi
 
     echo $run_time > $last_run_file
 
@@ -53,7 +61,7 @@ download () {
         --complete_dir $AUDIBLE_COMPLETE \
         --target_dir $AUDIBLE_DEST \
         --use-audible-cli-data \
-        --audible-cli-library-file $AUDIBLE_CONFIG_DIR/library.tsv \
+        --audible-cli-library-file $library_file \
         --dir-naming-scheme '${artist//[:.]}/${series_sequence:+$series_sequence/}${title//[:.]}' \
         --file-naming-scheme '${title//[:.]}' \
         --chapter-naming-scheme '${title//[:.]}-$(printf %0${#chaptercount}d $chapternum) ${chapter//[:.]}' \
