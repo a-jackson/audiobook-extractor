@@ -62,7 +62,7 @@ download () {
         --target_dir $AUDIBLE_DEST \
         --use-audible-cli-data \
         --audible-cli-library-file $library_file \
-        --dir-naming-scheme '${artist//[:.]}/${series_sequence:+$series_sequence/}${title//[:.]}' \
+        --dir-naming-scheme '${artist//[:.]}/${series_title:+$series_title/}${title//[:.]}' \
         --file-naming-scheme '${title//[:.]}' \
         --chapter-naming-scheme '${title//[:.]}-$(printf %0${#chaptercount}d $chapternum) ${chapter//[:.]}' \
         --debug \
