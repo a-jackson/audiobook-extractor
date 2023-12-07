@@ -18,10 +18,9 @@ RUN apt-get update; \
         bc \
         jq
 
-COPY AAXtoMP3 /aaxtomp3
-
 RUN pip install audible-cli
 
+COPY AAXtoMP3 /aaxtomp3
 ADD entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 

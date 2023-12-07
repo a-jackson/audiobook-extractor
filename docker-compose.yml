@@ -1,0 +1,10 @@
+version: "3.0"
+
+services:
+  extractor:
+    build: .
+    volumes:
+      - ./volumes/config:/config
+      - ./volumes/dest:/dest
+      - ./volumes/complete:/complete
+      - ./volumes/tmp:/tmp/audible

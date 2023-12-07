@@ -18,7 +18,7 @@ docker run \
   quickstart
 ```
 
-Commands passed to the container are interpretted by Audible CLI, no command will perform the download.
+Commands passed to the container are interpreted by Audible CLI, no command will perform the download.
 You can add multiple profiles in this way and then use the `AUDIBLE_PROFILE` environment variable to control which to download.
 
 Once a profile is created, run the container again without a command and it will download and extract your audiobooks.
