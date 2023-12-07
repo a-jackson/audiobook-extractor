@@ -595,7 +595,7 @@ get_metadata_value() {
   local key
   key="$1"
         # Find the key in the meta data file                                  # Extract field value     # Remove the following /'s  "(Unabridged)  <blanks> at start end and multiples.
-  echo "$($GREP --max-count=1 --only-matching "${key} *: .*" "$metadata_file" | cut -d : -f 2- | $SED -e 's#/##g;s/ (Unabridged)//;s/^[[:blank:]]\+//g;s/[[:blank:]]\+$//g' | $SED 's/[[:blank:]]\+/ /g')"
+  echo "$($GREP --max-count=1 --only-matching "${key}\s*: .*" "$metadata_file" | cut -d : -f 2- | $SED -e 's#/##g;s/ (Unabridged)//;s/^[[:blank:]]\+//g;s/[[:blank:]]\+$//g' | $SED 's/[[:blank:]]\+/ /g')"
 }
 
 # -----
@@ -689,7 +689,7 @@ do
   album="$(get_metadata_value album)"
   album_date="$(get_metadata_value date)"
   copyright="$(get_metadata_value copyright)"
-  series="$(get_metadata_value series)"
+  series="$(get_metadata_value series_title)"
   series_sequence="$(get_metadata_value series_sequence)"
 
   # Get more tags with mediainfo
@@ -702,6 +702,8 @@ do
     description=""
     publisher=""
   fi
+
+  debug_vars "Metadata values" title bitrate album album_date copyright series series_sequence narrator description publisher
 
   # Define the output_directory
   if [ "${customDNS}" == "1" ]; then
@@ -791,6 +793,7 @@ do
       -metadata publisher="${publisher}" \
       -metadata series="${series}" \
       -metadata series_sequence="${series_sequence}" \
+      -metadata series-part="${series_sequence}" \
       -f ${container} \
       "${output_file}"
     if [ "$((${loglevel} > 0))" == "1" ]; then
