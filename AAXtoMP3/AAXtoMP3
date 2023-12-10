@@ -666,7 +666,8 @@ do
   # -----
   # Make sure everything is a variable.  Simplifying Command interpretation
   save_metadata "${aax_file}"
-  genre=$(get_metadata_value genre)
+  genre=$(get_metadata_value genres)
+  genre=$(echo "$genre" | sed 's/ *, */\//g; s/[[:space:]]*$//g')
   if [ "x${authorOverride}" != "x" ]; then
     #Manual Override
     artist="${authorOverride}"
