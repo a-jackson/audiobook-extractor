@@ -686,6 +686,7 @@ do
   fi
   title=$(get_metadata_value title)
   title=${title:0:128}
+  subtitle=$(get_metadata_value subtitle)
   bitrate="$(get_bitrate)k"
   album="$(get_metadata_value album)"
   album_date="$(get_metadata_value date)"
@@ -785,6 +786,7 @@ do
       -metadata artist="${artist}" \
       -metadata album_artist="${album_artist}" \
       -metadata album="${album}" \
+      -matadata subtitle="${subtitle}" \
       -metadata date="${album_date}" \
       -metadata track="1/1" \
       -metadata genre="${genre}" \
@@ -795,6 +797,7 @@ do
       -metadata series="${series}" \
       -metadata series_sequence="${series_sequence}" \
       -metadata series-part="${series_sequence}" \
+      -metadata asin="${asin}" \
       -f ${container} \
       "${output_file}"
     if [ "$((${loglevel} > 0))" == "1" ]; then
