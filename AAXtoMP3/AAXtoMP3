@@ -785,8 +785,8 @@ do
       -metadata title="${title}" \
       -metadata artist="${artist}" \
       -metadata album_artist="${album_artist}" \
-      -metadata album="${album}" \
-      -matadata subtitle="${subtitle}" \
+      -metadata album="${title:-album}" \
+      -metadata subtitle="${subtitle}" \
       -metadata date="${album_date}" \
       -metadata track="1/1" \
       -metadata genre="${genre}" \
