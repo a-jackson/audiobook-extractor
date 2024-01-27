@@ -1,5 +1,7 @@
 #!/bin/bash
 
+AUDIBLE="audible"
+AAXtoMP3="./aaxtomp3"
 
 download () {
     local last_run_file="$AUDIBLE_CONFIG_DIR/lastrun"
@@ -43,21 +45,21 @@ download () {
         mkdir -p $AUDIBLE_DEST
     fi
 
-    audible "${download_opts[@]}"
+    "$AUDIBLE" "${download_opts[@]}"
 
     library_file=$AUDIBLE_CONFIG_DIR/library.tsv
     if [ ! -z $AUDIBLE_PROFILE ]
     then
         library_file=$AUDIBLE_CONFIG_DIR/library-$AUDIBLE_PROFILE.tsv
-        audible --profile $AUDIBLE_PROFILE library export -o $library_file
+        "$AUDIBLE" --profile $AUDIBLE_PROFILE library export -o $library_file
     else
-        audible library export -o $library_file
+        "$AUDIBLE" library export -o $library_file
     fi
 
     echo $run_time > $last_run_file
 
     cd $TEMP_DOWNLOAD
-    /aaxtomp3/AAXtoMP3 \
+    "$AAXtoMP3" \
         --complete_dir $AUDIBLE_COMPLETE \
         --target_dir $AUDIBLE_DEST \
         --use-audible-cli-data \
@@ -71,7 +73,7 @@ download () {
 
 if [ "$1" == "quickstart" ] 
 then
-    audible quickstart
+    "$AUDIBLE" quickstart
 elif [ "$1" == "download" ] 
 then
     if [ ! -f "$AUDIBLE_CONFIG_DIR/config.toml" ]
@@ -82,5 +84,5 @@ then
 
     download
 else
-    audible $@
+    "$AUDIBLE" $@
 fi

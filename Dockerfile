@@ -20,8 +20,9 @@ RUN apt-get update; \
 
 RUN pip install audible-cli
 
-COPY AAXtoMP3 /aaxtomp3
-ADD entrypoint.sh /
-ENTRYPOINT [ "/entrypoint.sh" ]
+ADD aaxtomp3 /
+ADD audiobook-extractor /
+WORKDIR /
+ENTRYPOINT [ "/audiobook-extractor" ]
 
 CMD [ "download" ]
