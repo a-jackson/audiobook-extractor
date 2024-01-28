@@ -58,7 +58,6 @@ download () {
 
     echo $run_time > $last_run_file
 
-    cd $TEMP_DOWNLOAD
     "$AAXtoMP3" \
         --complete_dir $AUDIBLE_COMPLETE \
         --target_dir $AUDIBLE_DEST \
@@ -68,7 +67,7 @@ download () {
         --file-naming-scheme '${series_sequence:+Book $series_sequence - }${album//[:.]}' \
         --chapter-naming-scheme '${album//[:.]}-$(printf %0${#chaptercount}d $chapternum) ${chapter//[:.]}' \
         --debug \
-        *.aaxc
+        $TEMP_DOWNLOAD/*.aaxc
 }
 
 if [ "$1" == "quickstart" ] 
