@@ -2,6 +2,7 @@
 with lib;
 let
   cfg = config.services.audiobook-extractor;
+  package = self.packages.${pkgs.system}.audiobook-extractor;
 in
 {
   options.services.audiobook-extractor = mkOption {
@@ -51,7 +52,7 @@ in
             after = [ "network-online.target" ];
             startAt = [ abe.startAt ];
             serviceConfig = {
-              ExecStart = "${pkgs.audiobook-extractor}/bin/audiobook-extractor download";
+              ExecStart = "${package}/bin/audiobook-extractor download";
             };
           }))
         cfg;
@@ -59,7 +60,7 @@ in
     environment.systemPackages = lib.mapAttrsToList
       (name: abe:
         let
-          abeCmd = "${packages.audiobook-extractor}/bin/audiobook-extractor";
+          abeCmd = "${package}/bin/audiobook-extractor";
         in
         pkgs.writeShellScriptBin "audiobook-exxtractor-${name}" ''
           set -a
