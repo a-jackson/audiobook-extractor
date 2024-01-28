@@ -24,6 +24,7 @@
           default = with pkgs; mkShell {
             packages = [
               packages.audiobook-extractor
+              audible-cli
             ];
           };
         };
@@ -87,12 +88,12 @@
                   }))
                 cfg;
 
-            environment.systemPackages = lib.mapAttrsToList
+            environment.systemPackages = (lib.mapAttrsToList
               (name: abe:
                 let
                   abeCmd = "${package}/bin/audiobook-extractor";
                 in
-                pkgs.writeShellScriptBin "audiobook-exxtractor-${name}" ''
+                pkgs.writeShellScriptBin "audiobook-extractor-${name}" ''
                   set -a
                   ${lib.pipe config.systemd.services."audiobook-extractor-${name}".environment [
                     (lib.filterAttrs (n: v: v != null && n != "PATH"))
@@ -102,7 +103,9 @@
 
                   exec ${abeCmd} $@
                 '')
-              cfg;
+              cfg) ++ [
+                pkgs.audible-cli
+              ];
           };
         };
     };
