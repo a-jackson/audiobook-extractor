@@ -20,6 +20,7 @@
       {
         defaultPackage = packages.audiobook-extractor;
         packages.audiobook-extractor = pkgs.callPackage ./nix/package.nix {};
+        nixosModules.default = import ./nix/module.nix;
         devShells = rec {
           default = with pkgs; mkShell {
             packages = [
