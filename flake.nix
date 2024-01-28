@@ -2,7 +2,7 @@
   description = "System config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
     resholve.url = "github:abathur/resholve";
     resholve.inputs.nixpkgs.follows = "nixpkgs";
@@ -103,9 +103,7 @@
 
                   exec ${abeCmd} $@
                 '')
-              cfg) ++ [
-                pkgs.audible-cli
-              ];
+              cfg);
           };
         };
     };
