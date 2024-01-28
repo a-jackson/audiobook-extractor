@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, self, ... }:
 with lib;
 let
   cfg = config.services.audiobook-extractor;
