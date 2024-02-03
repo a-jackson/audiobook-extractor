@@ -84,6 +84,11 @@
                     startAt = [ abe.startAt ];
                     serviceConfig = {
                       ExecStart = "${package}/bin/audiobook-extractor download";
+                      StateDirectory = "audiobook-extractor";
+                      User = 99;
+                      Group = 100;
+                      Type = "simple";
+                      Restart = "no";
                     };
                   }))
                 cfg;
