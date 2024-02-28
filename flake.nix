@@ -36,34 +36,59 @@
           package = self.packages.${pkgs.system}.audiobook-extractor;
         in
         {
-          options.services.audiobook-extractor = mkOption {
-            default = { };
-            type = types.attrsOf
-              (types.submodule ({ config, name, ... }: {
-                options = {
-                  configDir = mkOption {
-                    type = types.str;
-                    default = "/var/lib/audiobook-extractor";
+          options.services.audiobook-extractor = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            profiles = mkOption {
+              default = { };
+              type = types.attrsOf
+                (types.submodule ({ config, name, ... }: {
+                  options = {
+                    configDir = mkOption {
+                      type = types.str;
+                      default = "/var/lib/audiobook-extractor";
+                    };
+                    tempDir = mkOption {
+                      type = types.str;
+                      default = "/tmp/audiobook-extractor";
+                    };
+                    destinationDir = mkOption {
+                      type = types.str;
+                    };
+                    completeDir = mkOption {
+                      type = types.str;
+                    };
+                    startAt = mkOption {
+                      type = types.str;
+                      default = "06:00:00";
+                    };
                   };
-                  tempDir = mkOption {
-                    type = types.str;
-                    default = "/tmp/audiobook-extractor";
-                  };
-                  destinationDir = mkOption {
-                    type = types.str;
-                  };
-                  completeDir = mkOption {
-                    type = types.str;
-                  };
-                  startAt = mkOption {
-                    type = types.str;
-                    default = "06:00:00";
-                  };
-                };
-              }));
+                }));
+            };
+            user = mkOption {
+              type = types.str;
+              default = "audiobookextractor";
+            };
+            group = mkOption {
+              type = types.str;
+              default = "audiobookextractor";
+            };
           };
 
-          config = {
+          config = mkIf cfg.enable {
+            users.users = mkIf (cfg.user == "audiobookextractor") {
+              audiobookextractor = {
+                group = cfg.group;
+                isSystemUser = true;
+              };
+            };
+
+            users.groups = mkIf (cfg.group == "audiobookextractor") {
+              audiobookextractor = { };
+            };
+
             systemd.services =
               mapAttrs'
                 (name: abe:
@@ -85,13 +110,13 @@
                     serviceConfig = {
                       ExecStart = "${package}/bin/audiobook-extractor download";
                       StateDirectory = "audiobook-extractor";
-                      User = 99;
-                      Group = 100;
+                      User = cfg.user;
+                      Group = cfg.group;
                       Type = "simple";
                       Restart = "no";
                     };
                   }))
-                cfg;
+                cfg.profiles;
 
             environment.systemPackages = (lib.mapAttrsToList
               (name: abe:
@@ -106,9 +131,9 @@
                     (lib.concatStringsSep "\n")
                   ]}
 
-                  exec ${abeCmd} $@
+                  exec ${pkgs.sudo}/bin/sudo --user=${cfg.user} --group=${cfg.group} ${abeCmd} $@
                 '')
-              cfg);
+              cfg.profiles);
           };
         };
     };
