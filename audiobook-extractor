@@ -23,6 +23,7 @@ download () {
     download_opts=(${download_opts[@]} --cover-size 1215)
     download_opts=(${download_opts[@]} --ignore-podcasts)
     download_opts=(${download_opts[@]} --ignore-errors)
+    download_opts=(${download_opts[@]} --filename-mode asin_ascii)
 
     if [ -f $last_run_file ]
     then
@@ -83,5 +84,9 @@ then
 
     download
 else
-    "$AUDIBLE" $@
+    if [ ! -z "$AUDIBLE_PROFILE" ]; then
+        "$AUDIBLE" --profile "$AUDIBLE_PROFILE" $@
+    else
+        "$AUDIBLE" $@
+    fi
 fi
