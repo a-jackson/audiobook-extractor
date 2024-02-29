@@ -1028,6 +1028,15 @@ do
       log "Moving Transcoded ${aax_file} to ${completedir}"
     fi
     mv "${aax_file}" "${completedir}"
+    if [ -f "${extra_voucher}" ]; then
+      mv "${extra_voucher}" "${completedir}"
+    fi
+    if [ -f "${extra_chapter_file}" ]; then
+      mv "${extra_chapter_file}" "${completedir}"
+    fi
+    if [ -f "${extra_cover_file}" ]; then
+      mv "${extra_cover_file}" "${completedir}"
+    fi
   fi
 
 done
