@@ -127,11 +127,11 @@
                   set -a
                   ${lib.pipe config.systemd.services."audiobook-extractor-${name}".environment [
                     (lib.filterAttrs (n: v: v != null && n != "PATH"))
-                    (lib.mapAttrsToList (n: v: "${n}=${v}"))
+                    (lib.mapAttrsToList (n: v: "export ${n}=${v}"))
                     (lib.concatStringsSep "\n")
                   ]}
 
-                  exec ${pkgs.sudo}/bin/sudo --user=${cfg.user} --group=${cfg.group} ${abeCmd} $@
+                  exec ${pkgs.sudo}/bin/sudo --preserve-env --user=${cfg.user} --group=${cfg.group} ${abeCmd} $@
                 '')
               cfg.profiles);
           };
