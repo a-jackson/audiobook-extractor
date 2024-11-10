@@ -17,11 +17,11 @@
         "yallback": "yallback"
       },
       "locked": {
-        "lastModified": 1695100998,
-        "narHash": "sha256-WeHHhD/zzSA148u/SRV3EIOaEuDLe+5Lav2EwEROG10=",
+        "lastModified": 1711149136,
+        "narHash": "sha256-CQOGpmH8eG8GLxC8xfUcdYvVcAwmpIkxohw4dCWwTc4=",
         "owner": "abathur",
         "repo": "binlore",
-        "rev": "cf5c0e606de4b597720251ac327cd489addd0bd4",
+        "rev": "a425d4a1d06ab8d952f49d61fea292ede53dd25c",
         "type": "github"
       },
       "original": {
@@ -66,11 +66,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "type": "github"
       },
       "original": {
@@ -84,11 +84,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1705309234,
-        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1706098335,
-        "narHash": "sha256-r3dWjT8P9/Ah5m5ul4WqIWD8muj5F+/gbCdjiNVBKmU=",
+        "lastModified": 1720535198,
+        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a77ab169a83a4175169d78684ddd2e54486ac651",
+        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
         "type": "github"
       },
       "original": {
@@ -126,11 +126,11 @@
         "wwurst": "wwurst"
       },
       "locked": {
-        "lastModified": 1701239772,
-        "narHash": "sha256-ep8Bpa/BESA1dn3D/sYcIQz0ncOnFowLNsRsqlbO2Hk=",
+        "lastModified": 1716380986,
+        "narHash": "sha256-D8HKfam0cuaI/YxRGHdyq9RWnsymh44GCaltK5nmUVc=",
         "owner": "abathur",
         "repo": "resholve",
-        "rev": "b36dda267fb7d028277b1f08bada784286989bac",
+        "rev": "ebd7901b36a0830b67cf300e2ee5719b867a2059",
         "type": "github"
       },
       "original": {
